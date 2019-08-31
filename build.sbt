@@ -28,28 +28,9 @@ lazy val baseSettings: Seq[Setting[_]] = Seq(
   )
 )
 
-lazy val foundation = project
-  .in(file("."))
-  .settings(moduleName := "foundation")
-  .settings(baseSettings: _*)
-  .aggregate(exercises, slides)
-  .dependsOn(exercises, slides)
-
 lazy val exercises = project
   .settings(moduleName := "foundation-exercises")
   .settings(baseSettings: _*)
-
-lazy val slides = project
-  .dependsOn(exercises)
-  .settings(moduleName := "foundation-slides")
-  .settings(moduleName := "foundation-slides")
-  .settings(baseSettings: _*)
-  .settings(
-    tutSourceDirectory := baseDirectory.value / "tut",
-    tutTargetDirectory := baseDirectory.value / "docs"
-  )
-  .enablePlugins(TutPlugin)
-
 
 addCommandAlias("testAnswers", "testOnly *AnswersTest")
 
